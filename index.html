@@ -1,103 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TerraLink</title>
+    <title>App de Automatización de Granjas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Barra de navegación -->
+    <!-- Popup de bienvenida -->
+    <div id="welcomePopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>¡Bienvenido a TerraLink!</h2>
+            <p>Esta aplicación te permite controlar luces, sistemas de riego y monitorear el clima y el consumo de recursos.</p>
+        </div>
+    </div>
+
+    <!-- Barra de navegación con botón de toggle -->
     <nav>
-        <ul>
-            <li><a href="#" onclick="showSection('home')">Inicio</a></li>
+        <button id="navToggle" onclick="toggleNav()">&#9776;</button>
+        <ul id="navMenu">
             <li><a href="#" onclick="showSection('map')">Mapa</a></li>
-            <li><a href="#" onclick="showSection('irrigation')">Riego</a></li>
-            <li><a href="#" onclick="showSection('lights')">Luces</a></li>
+            <li><a href="#" onclick="showSection('riego')">Riego</a></li>
+            <li><a href="#" onclick="showSection('luces')">Luces</a></li>
+            <li><a href="#" onclick="showSection('stats')">Estadísticas</a></li>
         </ul>
     </nav>
 
-    <h1><strong>TERRALINK</strong></h1>
-
-    <!-- Sección de bienvenida (página principal) -->
-    <div id="home" class="section">
-        <h2>Bienvenido a TerraLink</h2>
-        <p>Esta aplicación está diseñada para ayudar a los agricultores a automatizar y gestionar fácilmente las tareas diarias de su granja. Desde este panel, puedes controlar remotamente el sistema de luces y riego, así como programar horarios automáticos para mejorar la eficiencia de tu granja.</p>
-        <p>Explora las diferentes secciones:</p>
-        <ul>
-            <li><strong>Mapa:</strong> Visualiza las áreas de tu granja.</li>
-            <li><strong>Riego:</strong> Controla y programa los sistemas de riego por zonas.</li>
-            <li><strong>Luces:</strong> Controla y programa las luces de la granja.</li>
-        </ul>
-        <p>Con TerraLink, podrás optimizar el uso de recursos y mejorar la productividad de tu granja de manera eficiente y sencilla.</p>
-    </div>
-
-    <!-- Sección de Mapa -->
-    <div id="map" class="section" style="display: none;">
-        <h2>Mapa de la Granja</h2>
-        <p>Aquí va un mapa visual de la granja para ver la disposición de las áreas de riego y luces.</p>
-    </div>
+    <!-- Sección del mapa -->
+    <section id="map" class="section">
+        <h1>Mapa de la Granja</h1>
+        <div class="map-container">
+            <div class="map-zone" id="zone1" style="top: 20%; left: 30%; background-color: #e74c3c;">Invernadero</div>
+            <div class="map-zone" id="zone2" style="top: 50%; left: 50%; background-color: #3498db;">Campo de Cultivo</div>
+            <div class="map-zone" id="zone3" style="top: 70%; left: 15%; background-color: #2ecc71;">Estanque</div>
+        </div>
+        <p>Haz clic en una zona para obtener más información.</p>
+    </section>
 
     <!-- Sección de Riego -->
-    <div id="irrigation" class="section" style="display: none;">
-        <h2>Control de Riego</h2>
-        <div class="farm-grid">
-            <div class="zone" id="zone1">
-                <h2>Zona 1</h2>
-                <p>Riego: <span id="waterStatus1">Apagado</span></p>
-                <button onclick="toggleWater('1')">Encender/Apagar Riego</button>
+    <section id="riego" class="section" style="display: none;">
+        <h2>Sistema de Riego</h2>
+        <div class="zone-control">
+            <div class="control-zone">
+                <h3>Zona 1</h3>
+                <button onclick="toggleIrrigation('zone1')">Activar Riego</button>
+                <input type="time" id="timeIrrigationZone1" placeholder="Programar Riego">
+                <button onclick="programIrrigation('zone1')">Programar</button>
             </div>
-            <div class="zone" id="zone2">
-                <h2>Zona 2</h2>
-                <p>Riego: <span id="waterStatus2">Apagado</span></p>
-                <button onclick="toggleWater('2')">Encender/Apagar Riego</button>
+            <div class="control-zone">
+                <h3>Zona 2</h3>
+                <button onclick="toggleIrrigation('zone2')">Activar Riego</button>
+                <input type="time" id="timeIrrigationZone2" placeholder="Programar Riego">
+                <button onclick="programIrrigation('zone2')">Programar</button>
             </div>
-        </div>
-        <div class="schedule-section">
-            <h3>Programación de Riego</h3>
-            <div class="schedule">
-                <label for="waterTime1">Hora de riego (Zona 1):</label>
-                <input type="time" id="waterTime1">
-                <button onclick="setSchedule('1')">Programar Riego Zona 1</button>
-            </div>
-            <div class="schedule">
-                <label for="waterTime2">Hora de riego (Zona 2):</label>
-                <input type="time" id="waterTime2">
-                <button onclick="setSchedule('2')">Programar Riego Zona 2</button>
+            <div class="control-zone">
+                <h3>Zona 3</h3>
+                <button onclick="toggleIrrigation('zone3')">Activar Riego</button>
+                <input type="time" id="timeIrrigationZone3" placeholder="Programar Riego">
+                <button onclick="programIrrigation('zone3')">Programar</button>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Sección de Luces -->
-    <div id="lights" class="section" style="display: none;">
-        <h2>Control de Luces</h2>
-        <div class="farm-grid">
-            <div class="zone" id="zone1">
-                <h2>Zona 1</h2>
-                <p>Luces: <span id="lightStatus1">Apagadas</span></p>
-                <button onclick="toggleLight('1')">Encender/Apagar Luces</button>
+    <section id="luces" class="section" style="display: none;">
+        <h2>Sistema de Luces</h2>
+        <div class="zone-control">
+            <div class="control-zone">
+                <h3>Zona 1</h3>
+                <button onclick="toggleLights('zone1')">Activar Luces</button>
+                <input type="time" id="timeLightsZone1" placeholder="Programar Luces">
+                <button onclick="programLights('zone1')">Programar</button>
             </div>
-            <div class="zone" id="zone2">
-                <h2>Zona 2</h2>
-                <p>Luces: <span id="lightStatus2">Apagadas</span></p>
-                <button onclick="toggleLight('2')">Encender/Apagar Luces</button>
+            <div class="control-zone">
+                <h3>Zona 2</h3>
+                <button onclick="toggleLights('zone2')">Activar Luces</button>
+                <input type="time" id="timeLightsZone2" placeholder="Programar Luces">
+                <button onclick="programLights('zone2')">Programar</button>
             </div>
-        </div>
-        <div class="schedule-section">
-            <h3>Programación de Luces</h3>
-            <div class="schedule">
-                <label for="lightTime1">Hora de encendido (Zona 1):</label>
-                <input type="time" id="lightTime1">
-                <button onclick="setSchedule('1')">Programar Luces Zona 1</button>
-            </div>
-            <div class="schedule">
-                <label for="lightTime2">Hora de encendido (Zona 2):</label>
-                <input type="time" id="lightTime2">
-                <button onclick="setSchedule('2')">Programar Luces Zona 2</button>
+            <div class="control-zone">
+                <h3>Zona 3</h3>
+                <button onclick="toggleLights('zone3')">Activar Luces</button>
+                <input type="time" id="timeLightsZone3" placeholder="Programar Luces">
+                <button onclick="programLights('zone3')">Programar</button>
             </div>
         </div>
-    </div>
+    </section>
 
+    <!-- Sección de estadísticas -->
+    <section id="stats" class="section" style="display: none;">
+        <h1>Estadísticas de Consumo</h1>
+        <canvas id="consumptionChart"></canvas>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Automatización de Granjas</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
