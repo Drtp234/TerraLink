@@ -3,103 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRLK</title>
-    <link rel="stylesheet" href="style.css">
+    <title>TerraLink</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css"> <!-- Enlace al archivo CSS -->
 </head>
-<body class="container">
-    <!-- Popup de bienvenida -->
-    <div id="welcomePopup" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h2>¡Bienvenido a TerraLink!</h2>
-            <p>Esta aplicación te permite controlar luces, sistemas de riego y monitorear el clima y el consumo de recursos.</p>
+<body>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="header"></div>
+    <div class="sidebar">
+        <img alt="Logo" height="50" src="img/WorkUps.png" width="50"/>
+        <a href="#"><i class="fas fa-home"></i><span>INICIO</span></a>
+        <a href="#"><i class="fas fa-map"></i><span>MAPA</span></a>
+        <a href="#"><i class="fas fa-chart-line"></i><span>ESTAD.</span></a>
+        <a href="#"><i class="fas fa-tint"></i><span>RIEGO</span></a>
+        <a href="#"><i class="fas fa-lightbulb"></i><span>LUCES</span></a>
+        <a href="#"><i class="fas fa-user"></i><span>PERFIL</span></a>
+    </div>
+    <div class="content">
+        <div class="main-image"></div>
+        <div class="stats">
+            <div class="left">
+                <h2>ESTADÍSTICAS MENSUALES</h2>
+                <p>Actividad mensual.</p>
+                <div class="bar">
+                    <div>
+                        <div class="water"></div>
+                        <span>RIEGO</span>
+                        <span>200L</span>
+                        <span>RECOMENDADO</span>
+                        <span>150L</span>
+                    </div>
+                    <div>
+                        <div class="light"></div>
+                        <span>LUZ</span>
+                        <span>350KW</span>
+                        <span>RECOMENDADO</span>
+                        <span>220KW</span>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="climate">
+                    <h2>CLIMA</h2>
+                    <p>Actividad diaria.</p>
+                    <p class="temp">28°</p>
+                    <p>POTENCIALMENTE SOLEADO</p>
+                    <div class="recommendation">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>SE RECOMIENDA AUMENTAR EL CONSUMO DE RIEGO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <h2>¿ESTÁS LISTO PARA CUIDAR A TU GRANJA?</h2>
+            <button>ESTOY LISTO</button>
+            <button>INICIAR SESIÓN</button>
         </div>
     </div>
-
-    <!-- Barra de navegación con botón de toggle -->
-    <nav>
-        <button id="navToggle" onclick="toggleNav()">&#9776;</button>
-        <ul id="navMenu">
-            <li><a href="#" onclick="showSection('map')">Mapa</a></li>
-            <li><a href="#" onclick="showSection('riego')">Riego</a></li>
-            <li><a href="#" onclick="showSection('luces')">Luces</a></li>
-            <li><a href="#" onclick="showSection('stats')">Estadísticas</a></li>
-        </ul>
-    </nav>
-
-    <!-- Sección del mapa -->
-    <section id="map" class="section">
-        <h1>Mapa de la Granja</h1>
-        <div class="map-container">
-            <div class="map-zone" id="zone1" style="top: 20%; left: 30%; background-color: #e74c3c;">Invernadero</div>
-            <div class="map-zone" id="zone2" style="top: 50%; left: 50%; background-color: #3498db;">Campo de Cultivo</div>
-            <div class="map-zone" id="zone3" style="top: 70%; left: 15%; background-color: #2ecc71;">Estanque</div>
-        </div>
-        <p>Haz clic en una zona para obtener más información.</p>
-    </section>
-
-    <!-- Sección de Riego -->
-    <section id="riego" class="section" style="display: none;">
-        <h2>Sistema de Riego</h2>
-        <div class="zone-control">
-            <div class="control-zone">
-                <h3>Zona 1</h3>
-                <button onclick="toggleIrrigation('zone1')">Activar Riego</button>
-                <input type="time" id="timeIrrigationZone1" placeholder="Programar Riego">
-                <button onclick="programIrrigation('zone1')">Programar</button>
-            </div>
-            <div class="control-zone">
-                <h3>Zona 2</h3>
-                <button onclick="toggleIrrigation('zone2')">Activar Riego</button>
-                <input type="time" id="timeIrrigationZone2" placeholder="Programar Riego">
-                <button onclick="programIrrigation('zone2')">Programar</button>
-            </div>
-            <div class="control-zone">
-                <h3>Zona 3</h3>
-                <button onclick="toggleIrrigation('zone3')">Activar Riego</button>
-                <input type="time" id="timeIrrigationZone3" placeholder="Programar Riego">
-                <button onclick="programIrrigation('zone3')">Programar</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección de Luces -->
-    <section id="luces" class="section" style="display: none;">
-        <h2>Sistema de Luces</h2>
-        <div class="zone-control">
-            <div class="control-zone">
-                <h3>Zona 1</h3>
-                <button onclick="toggleLights('zone1')">Activar Luces</button>
-                <input type="time" id="timeLightsZone1" placeholder="Programar Luces">
-                <button onclick="programLights('zone1')">Programar</button>
-            </div>
-            <div class="control-zone">
-                <h3>Zona 2</h3>
-                <button onclick="toggleLights('zone2')">Activar Luces</button>
-                <input type="time" id="timeLightsZone2" placeholder="Programar Luces">
-                <button onclick="programLights('zone2')">Programar</button>
-            </div>
-            <div class="control-zone">
-                <h3>Zona 3</h3>
-                <button onclick="toggleLights('zone3')">Activar Luces</button>
-                <input type="time" id="timeLightsZone3" placeholder="Programar Luces">
-                <button onclick="programLights('zone3')">Programar</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección de estadísticas -->
-    <section id="stats" class="section" style="display: none;">
-        <h1>Estadísticas de Consumo</h1>
-        <canvas id="consumptionChart"></canvas>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Automatización de Granjas</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Enlace al archivo JavaScript -->
 </body>
 </html>

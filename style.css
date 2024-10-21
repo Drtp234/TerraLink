@@ -1,226 +1,221 @@
-/* General */
-body, html {
+body {
     margin: 0;
-    padding: 0;
     font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+.header {
+    background: url('img/WorkUp.jpg') no-repeat center center;
+    background-size: cover;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    height: 200px;
+}
+.sidebar {
+    position: fixed;
+    top: 50%;
+    left: -200px;
+    width: 200px;
+    height: auto;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    align-items: center;
+    padding-top: 20px;
+    transform: translateY(-50%);
+    transition: left 0.3s;
 }
-
-.container {
-    position: relative; /* Necesario para el posicionamiento del pseudo-elemento */
-    width: 100%;
-    height: 400px; /* Ajusta según sea necesario */
-}
-
-.container::before {
-    content: '';
-    position: absolute;
-    top: 0;
+.sidebar:hover {
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url(img/bg.jpg);
-    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
-    opacity: 0.5; /* Ajusta la opacidad aquí */
-    z-index: 0; /* Asegúrate de que el pseudo-elemento esté detrás del contenido */
 }
-
-h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 900;
+.sidebar img {
+    width: 50px;
+    margin-bottom: 20px;
 }
-
-section {
-    flex: 1;
-    padding: 20px;
-    z-index: 1;
-}
-
-/* Barra de navegación */
-nav {
-    background-color: #333;
-    padding: 10px;
-    position: relative;
-}
-
-#navToggle {
-    background-color: #fff;
-    color: #333;
-    padding: 10px;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-ul li {
-    margin-right: 20px;
-}
-
-ul li a {
-    color: white;
+.sidebar a {
     text-decoration: none;
-}
-
-#navMenu {
-    display: none;
-}
-
-.show {
-    display: flex !important;
-}
-
-/* Footer */
-footer {
-    background-color: #333;
-    color: white;
+    color: #000;
     text-align: center;
-    padding: 10px;
-    position: absolute;
+    margin: 20px 0;
     width: 100%;
-    bottom: 0;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.3s;
 }
-
-/* Popup */
-#welcomePopup {
-    position: fixed;
-    top: 0;
-    left: 0;
+.sidebar a:hover {
+    background-color: #f0f0f0;
+}
+.sidebar a i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+.sidebar a span {
+    font-size: 12px;
+    flex: 1;
+    text-align: left;
+}
+.content {
+    padding: 0;
+}
+.main-image {
+    width: 100%;
+    height: 300px;
+    background: url('img/karsten-wurth-UbGYPMbMYP8-unsplash.jpg') no-repeat center center;
+    background-size: cover;
+    margin: 0;
+}
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    margin: 0;
+}
+.stats .left, .stats .right {
+    width: 48%;
+}
+.stats h2 {
+    font-size: 24px;
+    margin: 0 0 10px 0;
+    font-weight: 900;
+    color: #fdd835;
+}
+.stats p {
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    font-weight: 400;
+}
+.stats .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.stats .bar div {
+    width: 45%;
+    text-align: center;
+}
+.stats .bar div span {
+    display: block;
+    margin-top: 10px;
+    font-weight: 700;
+}
+.stats .bar .water {
+    height: 150px;
+    background-color: #90caf9;
+}
+.stats .bar .light {
+    height: 220px;
+    background-color: #fdd835;
+}
+.climate {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Asegurarse de que el pop-up esté por encima */
-}
-
-.popup-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    position: relative;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Botones */
-.control-btn {
-    background-color: #3498db;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin: 5px 0;
-}
-
-.control-btn:hover {
-    background-color: #2980b9;
-}
-
-/* Mapa */
-.map-container {
-    position: relative;
-    width: 100%;
-    height: 400px; /* Ajustar el alto según sea necesario */
-    background-image: url(img/2981189.jpg); /* Cambia esto por la ruta de tu imagen de fondo */
+    background: url('img/john-currie-JQuUk8zEt48-unsplash.jpg');
     background-size: cover;
-    border: 2px solid #ccc; /* Bordes del mapa */
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.map-zone {
-    position: absolute;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 20px;
     text-align: center;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.3s;
+    border-radius: 10px;
+    margin: 20px;
 }
-
-.map-zone:hover {
-    transform: scale(1.05);
+.climate h2 {
+    font-size: 24px;
+    margin: 0 0 10px 0;
+    font-weight: 900;
+    color: #fff;
 }
-
-/* Estilo de las zonas de control de riego y luces */
-.zone-control {
+.climate p {
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    font-weight: 400;
+    color: #fff;
+}
+.climate .temp {
+    font-size: 48px;
+    margin: 0;
+    font-weight: 900;
+    color: #fff;
+}
+.climate .recommendation {
+    background-color: #fdd835;
+    padding: 10px;
     display: flex;
-    justify-content: space-around; /* Espaciado entre zonas */
-    flex-wrap: wrap; /* Permite que las zonas se ajusten en pantallas pequeñas */
+    align-items: center;
+    justify-content: center;
+    color: #000;
 }
-
-.control-zone {
-    background-color: #f39c12; /* Color de fondo para las zonas */
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px;
-    width: 30%; /* Ancho de cada zona */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.climate .recommendation i {
+    margin-right: 10px;
+    color: #000;
 }
-
-.control-zone h3 {
-    margin: 0 0 10px 0; /* Margen inferior para el título */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #fdd835;
+    margin: 0;
 }
-
-.control-zone button {
-    margin: 5px 0; /* Espaciado entre botones */
-    padding: 10px;
-    background-color: #27ae60; /* Color de fondo de los botones */
-    color: white;
+.footer h2 {
+    font-size: 24px;
+    margin: 0 0 20px 0;
+    font-weight: 900;
+}
+.footer button {
+    background-color: #fdd835;
+    color: #000;
+    border: 2px solid #000;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+}
+.footer button:last-child {
+    background-color: #000;
+    color: #fdd835;
+}
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #000;
+    color: #fff;
     border: none;
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s; /* Efecto de transición */
+    z-index: 1000;
 }
-
-.control-zone button:hover {
-    background-color: #219653; /* Color de fondo al pasar el mouse */
-}
-
-button {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #c0392b;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
-    ul {
+    .stats {
         flex-direction: column;
-        display: none;
     }
-
-    #navMenu.show {
-        display: flex;
+    .stats .left, .stats .right {
+        width: 100%;
+        margin-bottom: 20px;
     }
-
-    footer {
-        position: relative;
-        bottom: 0;
+    .content {
+        margin-left: 0;
+    }
+    .sidebar {
+        left: -200px;
+        top: 0;
+        width: 200px;
+        height: 100%;
+        transform: translateY(0);
+        transition: left 0.3s;
+    }
+    .sidebar:hover {
+        left: -200px;
+    }
+    .sidebar.active {
+        left: 0;
+    }
+    .menu-toggle {
+        display: block;
     }
 }
